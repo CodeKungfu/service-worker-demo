@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sevice Workder Demo</title>
+  </head>
+  <body>
+    <h1>Hello Service Worker</h1>
+    <div>
+        <button onclick="navigator.serviceWorker.controller.postMessage('start timer')">触发SW</button>
+    </div>
+    <script>
+        window.addEventListener('load', async () => {
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker
+                .register('/sw.js')
+                .then((registration) => {
+                    console.log('Service Worker registered successfully.')
+                    navigator.serviceWorker.controller.postMessage('stop')
+                });
+            }
+        });
+    </script>
+  </body>
+</html>
